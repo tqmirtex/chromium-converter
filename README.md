@@ -44,7 +44,7 @@ Chrome ウェブストアには公開していません。ソースからビル�
 
 1. リポジトリを取得します。
    ```bash
-   git clone <このリポジトリの URL>
+   git clone https://github.com/tqmirtex/chromium-converter
    cd <取得したフォルダ>
    ```
    GitHub の「Code」→「Download ZIP」でダウンロードし、展開してもかまいません。
