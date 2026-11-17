@@ -1,0 +1,14 @@
+# 依存とビルド成果物
+node_modules/
+dist/
+
+# ログ
+*.log
+npm-debug.log*
+
+# OS・エディタ固有
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/

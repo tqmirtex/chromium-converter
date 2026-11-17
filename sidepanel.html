@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>ファイル変換</title>
+    <link rel="stylesheet" href="/src/ui/style.css" />
+    <script type="module" src="/src/sidepanel/main.ts"></script>
+  </head>
+  <body>
+    <main class="app">
+      <header class="header">
+        <h1 class="title">ファイル変換</h1>
+        <p class="subtitle">ファイルはこの端末の中だけで変換され、外部には送信されません。</p>
+      </header>
+
+      <section aria-labelledby="drop-label">
+        <h2 id="drop-label" class="visually-hidden">ファイルを追加</h2>
+        <div id="dropzone" class="dropzone" role="button" tabindex="0" aria-describedby="drop-help">
+          <span class="dropzone-icon" id="drop-icon"></span>
+          <span class="dropzone-main">ファイルをドロップ</span>
+          <span id="drop-help" class="dropzone-help">クリックして選択、または Ctrl+V で貼り付け</span>
+        </div>
+        <input id="file-input" type="file" multiple hidden />
+      </section>
+
+      <section id="files-section" class="section" aria-labelledby="files-label" hidden>
+        <div class="section-head">
+          <h2 id="files-label" class="section-label">添付ファイル <span id="files-count"></span></h2>
+          <button id="clear-all" type="button" class="button-text">すべて削除</button>
+        </div>
+        <ul id="file-list" class="file-list"></ul>
+        <p id="mixed-warning" class="notice" role="status" hidden>
+          種類の異なるファイルは一度に変換できません。種類ごとに分けて追加してください。
+        </p>
+      </section>
+
+      <section id="targets-section" class="section" hidden>
+        <fieldset class="targets">
+          <legend class="section-label">変換先</legend>
+          <div id="target-list" class="target-list"></div>
+        </fieldset>
+      </section>
+
+      <section id="merge-section" class="section" hidden>
+        <fieldset class="options">
+          <legend class="section-label">PDFの作り方</legend>
+          <div class="option-list">
+            <label class="option">
+              <input type="radio" name="pdf-merge" value="separate" />
+              <span class="option-text">
+                <span class="option-label">画像ごとに別のPDFにする</span>
+                <span class="option-help">画像1枚につきPDFを1つ作る</span>
+              </span>
+            </label>
+            <label class="option">
+              <input type="radio" name="pdf-merge" value="merge" />
+              <span class="option-text">
+                <span class="option-label">1つのPDFにまとめる</span>
+                <span class="option-help">一覧の順に1ページずつ並べる。順番は一覧で並べ替えられる</span>
+              </span>
+            </label>
+          </div>
+        </fieldset>
+      </section>
+
+      <section id="save-section" class="section" hidden>
+        <fieldset class="options">
+          <legend class="section-label">保存方法</legend>
+          <div class="option-list">
+            <label class="option">
+              <input type="radio" name="save-mode" value="individual" />
+              <span class="option-text">
+                <span class="option-label">個別にダウンロード</span>
+                <span class="option-help">ダウンロード先に1つずつ保存</span>
+              </span>
+            </label>
+            <label class="option">
+              <input type="radio" name="save-mode" value="folder" />
+              <span class="option-text">
+                <span class="option-label">一括でフォルダにダウンロード</span>
+                <span class="option-help">最初に保存先のフォルダを1回選び、確認なしでまとめて保存</span>
+              </span>
+            </label>
+          </div>
+          <label id="zip-row" class="checkbox" hidden>
+            <input id="zip" type="checkbox" />
+            <span>ZIPにまとめる</span>
+          </label>
+        </fieldset>
+      </section>
+
+      <section id="action-section" class="section action" hidden>
+        <div id="progress" class="progress" hidden>
+          <div class="progress-head">
+            <span id="progress-text" role="status" aria-live="polite"></span>
+            <button id="cancel" type="button" class="button-secondary">キャンセル</button>
+          </div>
+          <div class="progress-track">
+            <div id="progress-bar" class="progress-bar" role="progressbar" aria-label="変換の進み具合" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"></div>
+          </div>
+          <p class="progress-note">変換中にこのパネルを閉じると、変換は中断されます(ファイルは保存されません)。</p>
+        </div>
+        <button id="convert" type="button" class="button-primary" disabled>変換してダウンロード</button>
+        <p id="summary" class="summary" role="status" aria-live="polite"></p>
+      </section>
+      <p id="announce" class="visually-hidden" aria-live="polite"></p>
+    </main>
+  </body>
+</html>
